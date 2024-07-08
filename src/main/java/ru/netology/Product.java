@@ -12,6 +12,7 @@ public class Product {
         this.title = title;
         this.price = price;
     }
+
     // Вспомогательные методы для корректной работы equals
     @Override
     public boolean equals(Object o) {

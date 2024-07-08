@@ -14,22 +14,24 @@ public class ProductTest {
     Product product1 = new Product(1, "Voter", 100);
     Product product2 = new Product(2, "Peper", 80);
     Product product3 = new Product(3, "lemon", 50);
-    Product product4 = new Product(4,"cat", 200);
-    Product product5 = new Product(4,"dog", 500);
+    Product product4 = new Product(4, "cat", 200);
+    Product product5 = new Product(4, "dog", 500);
 
     @BeforeEach
     public void setUp() {
         repo = new ShopRepository();
     }
+
     @Test
-    public void deletingNonExistingObject(){
+    public void deletingNonExistingObject() {
         repo.add(product1);
         Assertions.assertThrows(NotFoundException.class, () -> {
             repo.removeById(100);
         });
     }
+
     @Test
-    public void successOfDeletingAnExistingElement(){
+    public void successOfDeletingAnExistingElement() {
         repo.add(product1);
         repo.add(product2);
         repo.add(product3);
@@ -38,19 +40,21 @@ public class ProductTest {
         Product[] actual = repo.findAll();
         Assertions.assertArrayEquals(expected, actual);
     }
+
     @Test
-    public void successfulAdditionOfElement(){
+    public void successfulAdditionOfElement() {
         repo.add(product4);
         Product[] expected = {product4};
         Product[] actual = repo.findAll();
         Assertions.assertArrayEquals(expected, actual);
     }
+
     @Test
-    public void addingAnElementWithADuplicateID(){
+    public void addingAnElementWithADuplicateID() {
         repo.add(product4);
 
         Assertions.assertThrows(AlreadyExistsException.class, () ->
                 repo.add(product5)
-                );
+        );
     }
 }
